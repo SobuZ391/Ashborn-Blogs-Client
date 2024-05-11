@@ -5,11 +5,11 @@ import Header from "./Header";
 
 const Layout = () => {
     return (
-        <>
+        <div >
         <Header/>
-            <Outlet/>
+            <Outlet  />
         <Footer/>    
-        </>
+        </div>
     );
 };
 

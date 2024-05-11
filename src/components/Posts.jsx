@@ -44,7 +44,7 @@ const Posts = () => {
   const [posts, setPosts] = useState(DUMMY_POSTS);
   
   return (
-    <section className=' w-[100%]  bg-white lg:w-[70%] grid lg:grid-cols-3 gap-10 container mx-auto  ' >
+    <section className='  p-4 grid lg:grid-cols-3 gap-10 container mx-auto  ' >
       {posts.map(post => (
         <PostItem
           key={post.id}

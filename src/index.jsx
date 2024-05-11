@@ -59,7 +59,7 @@ const router = createBrowserRouter([
       element:<CreatePost/>
     },
     {
-      path:"posts/categories/:category",
+      path:`posts/categories/:category`,
       element:<CategoryPosts/>
     },
     {
