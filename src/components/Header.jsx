@@ -1,181 +1,143 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
+import useAuth from "../Hooks/useAuth";
+import { Button } from "@mui/material";
 
-const pages = ["Products", "Pricing", "Blog"];
-const links = (
-  <>
-    <li>
-      <Link to="/profile">Profile</Link>
-    </li>
-    <li>
-      <Link to="/create">Create Post</Link>
-    </li>
-    <li>
-      <Link to="/authors">Authors</Link>
-    </li>
-  </>
-);
-const settings = ["Profile", "Account", "Dashboard"];
-
-function Header() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
-  return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            <Link to={'/'} > LOGO</Link>
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {links}
-            </Menu>
-          </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
-          {/* Nav Buttons */}
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: "white", display: "block" }}
-            >
-              <Link to="/profile">Profile</Link>
-            </Button>
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: "white", display: "block" }}
-            >
-              <Link to="/create">Create Post</Link>
-            </Button>
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: "white", display: "block" }}
-            >
-              <Link to="/authors">Authors</Link>
-            </Button>
-          </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {links}
-              <li>
-                <Link to="/logout">Logout</Link>
-              </li>
-            </Menu>
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+const Navbar = () => {
+  const links = (
+    <>
+      <li>
+        <Link className="btn btn-ghost" to="/profile">Profile</Link>
+      </li>
+      <li>
+        <Link className="btn btn-ghost"  to="/create">Create Post</Link>
+      </li>
+      <li>
+        <Link className="btn btn-ghost"  to="/authors">Authors</Link>
+      </li>
+    </>
   );
-}
-export default Header;
+
+  const { logout, user } = useAuth();
+  return (
+    <div className="rounded-sm  ">
+      <div className="navbar container border-y-2  mx-auto ">
+        <div className="navbar-start">
+          <div className="dropdown z-10">
+            <label tabIndex={0} className="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </label>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3  p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <div className="flex  justify-center">
+                <label className="flex cursor-pointer gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="5" />
+                    <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
+                  </svg>
+                  <input
+                    type="checkbox"
+                    value="synthwave"
+                    className="toggle theme-controller"
+                  />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                  </svg>
+                </label>
+              </div>
+              {links}
+            </ul>
+          </div>
+          <Link
+            to="/"
+            className="btn btn-ghost  font-bold lg:w-[100%]   w-[50%] lg:text-xl"
+          >
+          <img className="w-12 rounded-xl shadow-sm"  src="https://img.freepik.com/free-vector/illustration-social-media-concept_53876-36932.jpg?t=st=1715452127~exp=1715455727~hmac=938e61723805facc5f031a9f10dea1a2b0414968a444e7ce5e8a1a52cd670899&w=826" alt="" />  <p className="text-cyan-700 shadow-xl p-2 rounded-b-lg" >AshBorn BLog's</p>
+          </Link>
+        </div>
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal items-center px-1">{links}</ul>
+        </div>
+
+        {/* avatar part  */}
+        <div className="navbar-end">
+          <div className="lg:block hidden"></div>
+          {user ? (
+            <div className="dropdown dropdown-end">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full ">
+                  <img
+                    src={user?.photoURL || "/images/client3.png"}
+                    alt={user.displayName}
+                  />
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <button className="btn btn-sm  btn-ghost">
+                    {user?.displayName || "user name not found"}
+                  </button>
+                </li>
+                <li>
+                  <button className="btn btn-sm  btn-ghost" onClick={logout}>
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <div className="gap-2 flex ">
+              <Link to="/login">
+                <Button variant="outlined" className="">
+                  Login
+                </Button>
+              </Link>
+              <Link to="/register">
+                <Button variant="outlined">Register</Button>
+              </Link>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Navbar;

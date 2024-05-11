@@ -19,8 +19,8 @@ import CreatePost from './pages/CreatePost';
 import EditPost from './pages/EditPost';
 import CategoryPosts from './pages/CategoryPosts';
 import Dashboard from './pages/Dashboard';
-import Logout from './Shared/Logout';
 import AuthorPosts from './pages/AuthorPosts/AuthorPosts';
+import FirebaseProvider from './FirebaseProvider/FirebaseProvider';
 
 
 const router = createBrowserRouter([
@@ -73,12 +73,8 @@ const router = createBrowserRouter([
     {
       path:"posts/:id/edit",
       element:<EditPost/>
-    },
-    {
-      path:"logout",
-      element:<Logout/>
-    },
-  
+    }
+   
   
   
   ]
@@ -89,6 +85,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-      <RouterProvider router={router} />
-  </React.StrictMode>,
+  <FirebaseProvider>
+  <RouterProvider router={router}/>
+  </FirebaseProvider>
+</React.StrictMode>,
 )
