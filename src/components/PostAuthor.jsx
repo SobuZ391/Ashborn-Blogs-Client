@@ -3,7 +3,7 @@ import Avatar from '../assets/avatar1.jpg'
 
 const PostAuthor = () => {
     return (
-        <Link className='flex mt-4 gap-5 items-start'  to={`/posts/users/sdfsdf`}>
+        <Link className='flex mt-4 gap-5 items-start'  to={`/posts/user/sdf`}>
             <div className="w-16 overflow-hidden rounded-md">
                 <img className='rounded-3xl'  src={Avatar} alt="" />
             </div>

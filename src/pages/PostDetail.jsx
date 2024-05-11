@@ -12,10 +12,10 @@ const PostDetail = () => {
           <div className="post_detail_button flex gap-4 items-center">
             <Button variant="outlined">
              
-              <Link to={`/post/werwer/edit`}>Edit</Link>
+              <Link to={`/posts/werwer/edit`}>Edit</Link>
             </Button>
             <Button variant="outlined" color="error">
-              <Link to={`/post/werwer/delete`}>Delete</Link>
+              <Link to={`/posts/werwer/delete`}>Delete</Link>
             </Button>
           </div>
         </div>
