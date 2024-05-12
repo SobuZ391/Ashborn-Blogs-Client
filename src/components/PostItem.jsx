@@ -12,13 +12,16 @@ const PostItem = ({ postId, thumbnail, title, category, description, authorID })
                 <img className='rounded-xl h-[16rem]  overflow-hidden '  src={thumbnail} alt="" />
             </div>
             <div className='mt-4' >
-                <Link to={`/posts/${postId}`}>
+                <Link >
                     <h3 className='m-1 text-xl font-bold' >{postTitle}</h3>
                 </Link>
                 <p className='text-gray-700 m-2' >{shortDescription}</p>
                 <div className='flex my-2 justify-between items-end' >
                     <PostAuthor authorID={authorID} />
-                    <Button variant="outlined"><Link  to={`/posts/categories/${category}`}>{category}</Link></Button>
+                  <div className='flex gap-2' >
+                  <Button variant="outlined"><Link  to={`/posts/categories/sdfss`}>WishList</Link></Button>
+                    <Button variant="outlined"><Link to={`/posts/${postId}`}>Details</Link></Button>
+                  </div>
                 </div>
             </div>
         </article>
