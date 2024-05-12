@@ -13,8 +13,6 @@ import Home from './pages/Home';
 import PostDetail from './pages/PostDetail';
 import Register from './Shared/Register';
 import Login from './Shared/Login';
-import UserProfile from './pages/UserProfile';
-import Authors from './pages/Authors';
 import CreatePost from './pages/CreatePost';
 import EditPost from './pages/EditPost';
 import CategoryPosts from './pages/CategoryPosts';
@@ -46,16 +44,10 @@ const router = createBrowserRouter([
       element:<Login/>
     },
    
+  
+  
     {
-      path:"profile/:id",
-      element:<UserProfile/>
-    },
-    {
-      path:"authors",
-      element:<Authors/>
-    },
-    {
-      path:"create",
+      path:"addBlog",
       element:<CreatePost/>
     },
     {
@@ -67,13 +59,14 @@ const router = createBrowserRouter([
       element:<AuthorPosts/>
     },
     {
-      path:"myposts/:id",
+      path:"featured",
       element:<Dashboard/>
     },
     {
       path:"posts/:id/edit",
       element:<EditPost/>
-    }
+    },
+    
    
   
   

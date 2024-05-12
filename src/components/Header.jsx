@@ -6,13 +6,19 @@ const Navbar = () => {
   const links = (
     <>
       <li>
-        <Link className="btn btn-ghost" to="/profile">Profile</Link>
+        <Link className="btn btn-ghost" to="/">Home</Link>
       </li>
       <li>
-        <Link className="btn btn-ghost"  to="/create">Create Post</Link>
+        <Link className="btn btn-ghost"  to="addBlog"> Add Blog</Link>
       </li>
       <li>
-        <Link className="btn btn-ghost"  to="/authors">Authors</Link>
+        <Link className="btn btn-ghost"  to="/featured">All Blogs</Link>
+      </li>
+      <li>
+        <Link className="btn btn-ghost"  to="/featured">Featured</Link>
+      </li>
+      <li>
+        <Link className="btn btn-ghost"  to="/featured">Wishlist</Link>
       </li>
     </>
   );
