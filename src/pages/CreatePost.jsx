@@ -1,38 +1,22 @@
 import { useState } from "react";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import useAuth from "../Hooks/useAuth";
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
+  const [short_description, setShort_description] = useState("");
   const [category, setCategory] = useState("Uncategorized");
-  const [description, setDescription] = useState("");
-  const [thumbnail, setThumbnail] = useState("");
-
-  const modules = {
-    toolbar: [
-      [{ header: [1, 2, 3, 4, 5, 6, false] }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
-      [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
-      ["link", "image"],
-      ["clean"],
-    ],
-  };
-
-  const formats = [
-    "header",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "indent",
-    "link",
-    "image",
-  ];
+  const [long_description, setLong_description] = useState("");
+  const [image_url, setImage_url] = useState("");
+  const { user } = useAuth();
 
   const POST_CATEGORIES = [
+    "Photography",
+    "Lifestyle",
+    "Food & Cooking",
+    "Technology",
+    "Wellness",
+    "Fashion & Beauty",
     "Agriculture",
     "Business",
     "Education",
@@ -42,43 +26,105 @@ const CreatePost = () => {
     "Uncategorized",
     "Weather",
   ];
+  console.log(user);
+
+ const handleAddBlog = (e) => {
+  e.preventDefault();
+  const newBlog = {
+    blogEmail: user.email,
+    title,
+    category,
+   short_description,
+     long_description,
+    image_url,
+    ownerName: user.displayName, // Pass owner name
+    ownerProfilePicture: user.photoURL, // Pass owner profile picture
+  };
+
+  // Send newBlog object to MongoDB
+  fetch(`http://localhost:5000/blogs`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newBlog),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      // Handle response as needed
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+};
 
   return (
-    <section className="container mx-auto my-16 post h-screen">
+    <section className="container mx-auto my-16 post h-screen bg-slate-200 rounded-xl p-4">
       <div>
-        <h2 className="text-3xl font-bold">Create Post</h2>
-        <p className="w-[70%] rounded-xl bg-red-600 text-white text-lg py-3 px-4 block mb-1">
-          This is an error message
-        </p>
-        <form className="form create-post_form flex flex-col gap-3 rounded-md resize-none">
+        <div className="flex items-center justify-center bg-accent rounded-xl">
+          <h2 className="text-4xl text-center border my-4 w-1/3 rounded-xl btn text-gray-700  font-bold">
+            Create Blog
+          </h2>
+        </div>
+        <label className="text-lg font-bold">Blog Title:</label>
+        <form
+          onSubmit={handleAddBlog}
+          className="form create-post_form flex flex-col gap-3 rounded-md resize-none"
+        >
           <input
-          className="input input-bordered w-1/3 " 
+            className="input input-bordered w-1/3"
             type="text"
+            name="title"
             placeholder="Title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             autoFocus
           />
+          <label className="text-lg font-bold">Category:</label>
           <select
-          className="btn text-lg input-bordered w-1/3 " 
+            className="btn text-lg input-bordered w-1/3"
             name="category"
             value={category}
-            onChange={(e) => setCategory(e.target.value)} // Fixed onChange handler
+            onChange={(e) => setCategory(e.target.value)}
           >
             {POST_CATEGORIES.map((cat) => (
               <option key={cat}>{cat}</option>
             ))}
           </select>
           <div>
-            <ReactQuill className="overflow-scroll bg-white h-52"  modules={modules} formats={formats} value={description} onChange={setDescription} />
+            <label className="text-lg font-bold">Short Description</label>
+            <input
+              className="input input-bordered my-4 w-[100%]"
+              type="text"
+              name="shortDescription"
+              placeholder="Short Description"
+              value={short_description}
+              onChange={(e) => setShort_description(e.target.value)}
+              autoFocus
+            />
+            <label className="text-lg font-bold">Long Description</label>
+            <textarea
+              className="overflow-scroll bg-white w-full h-52 input input-bordered"
+              name="long_description"
+              placeholder="Long Description"
+              value={long_description}
+              onChange={(e) => setLong_description(e.target.value)}
+            />
           </div>
+          <label className="text-lg font-semibold italic">Image Url:</label>
           <input
-            type="file"
-            onChange={(e) => setThumbnail(e.target.files[0])}
-            accept="image/png, image/jpeg"
+            className="input input-bordered"
+            name="image"
+            type="text"
+            placeholder="Image Url"
+            value={image_url}
+            onChange={(e) => setImage_url(e.target.value)}
           />
-          <input type="text" className="w-[100%] p-4 rounded-md" />
-          <button type="submit" className="btn w-1/6 text-lg btn-primary">
+          <button
+            type="submit"
+            className="btn lg:w-2/6 mx-auto mt-10 text-lg btn-primary"
+          >
             Create
           </button>
         </form>

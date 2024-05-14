@@ -1,17 +1,21 @@
 import { Link } from 'react-router-dom';
 import Avatar from '../assets/avatar1.jpg'
+import useAuth from '../Hooks/useAuth';
 
 const PostAuthor = () => {
+    const {user}=useAuth()
+    console.log(user);
+    const{displayName,photoUrl}=user
     return (
-        <Link className='flex mt-4 gap-5 items-start'  to={`/posts/user/sdf`}>
+        <div className='flex mt-4 gap-5 items-start'  >
             <div className="w-16 overflow-hidden rounded-md">
-                <img className='rounded-3xl'  src={Avatar} alt="" />
+                <img className='rounded-3xl'  src={photoUrl} alt="" />
             </div>
             <div className='w-full' >
-                <h1 className='text-gray-800 text-xl font-semibold' >Ernest Achiever</h1>
+                <h1 className='text-gray-800  font-semibold' >{displayName}</h1>
                 <small>Just Now</small>
             </div>
-        </Link>
+        </div>
     );
 };
 

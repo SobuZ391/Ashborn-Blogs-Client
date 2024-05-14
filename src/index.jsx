@@ -19,6 +19,11 @@ import CategoryPosts from './pages/CategoryPosts';
 import Dashboard from './pages/Dashboard';
 import AuthorPosts from './pages/AuthorPosts/AuthorPosts';
 import FirebaseProvider from './FirebaseProvider/FirebaseProvider';
+import WishlistPage from './pages/WishlistPage';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
+import WishlistItem from './pages/WishListItem';
+import PostEmail from './pages/PostEmail';
+import AllBlogs from './pages/AllBlogs';
 
 
 const router = createBrowserRouter([
@@ -28,11 +33,17 @@ const router = createBrowserRouter([
     errorElement:<ErrorPage/>,
     children:[{
       path:"/",
-      element:<Home/>
+      element:<Home/>,
+      
     },
     {
       path:"/posts/:id",
-      element:<PostDetail></PostDetail>
+      element:<PostDetail></PostDetail>,
+      loader:({params})=>fetch(`${import.meta.env.VITE_API_URL}/blog/${params.id}`)
+    },
+    {
+      path:"allblogs",
+      element:<AllBlogs></AllBlogs>
     },
     {
       path:"register",
@@ -64,9 +75,19 @@ const router = createBrowserRouter([
     },
     {
       path:"posts/:id/edit",
-      element:<EditPost/>
+      element:<EditPost/>,
+      loader:({params})=>fetch(`http://localhost:5000/blog/${params.id}`)
     },
-    
+    {
+      path:"/wishlist",
+      element:<PrivateRoute><WishlistPage/></PrivateRoute>,
+     
+    },
+    {
+      path:"/postEmail",
+      element:<PostEmail></PostEmail>,
+      loader:({params})=>fetch(`http://localhost:5000/blog/${params.id}`)
+    }
    
   
   
@@ -78,8 +99,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-  <FirebaseProvider>
-  <RouterProvider router={router}/>
-  </FirebaseProvider>
+    <FirebaseProvider>
+        <RouterProvider router={router}/>
+    </FirebaseProvider>
 </React.StrictMode>,
 )

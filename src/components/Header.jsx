@@ -12,13 +12,13 @@ const Navbar = () => {
         <Link className="btn btn-ghost"  to="addBlog"> Add Blog</Link>
       </li>
       <li>
-        <Link className="btn btn-ghost"  to="/featured">All Blogs</Link>
+        <Link className="btn btn-ghost"  to="/allblogs">All Blogs</Link>
       </li>
       <li>
         <Link className="btn btn-ghost"  to="/featured">Featured</Link>
       </li>
       <li>
-        <Link className="btn btn-ghost"  to="/featured">Wishlist</Link>
+        <Link className="btn btn-ghost"  to="/wishlist">Wishlist</Link>
       </li>
     </>
   );
@@ -92,7 +92,7 @@ const Navbar = () => {
             to="/"
             className="btn btn-ghost  font-bold lg:w-[100%]   w-[50%] lg:text-xl"
           >
-          <img className="w-12 rounded-xl shadow-sm"  src="https://img.freepik.com/free-vector/illustration-social-media-concept_53876-36932.jpg?t=st=1715452127~exp=1715455727~hmac=938e61723805facc5f031a9f10dea1a2b0414968a444e7ce5e8a1a52cd670899&w=826" alt="" />  <p className="text-cyan-700 shadow-xl p-2 rounded-b-lg" >AshBorn BLog's</p>
+          <img className="w-12 rounded-xl shadow-sm"  src="https://img.freepik.com/free-vector/illustration-social-media-concept_53876-36932.jpg?t=st=1715452127~exp=1715455727~hmac=938e61723805facc5f031a9f10dea1a2b0414968a444e7ce5e8a1a52cd670899&w=826" alt="" />  <p className="text-cyan-700 shadow-xl p-2 rounded-b-lg" >AshBorn Blog's</p>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
