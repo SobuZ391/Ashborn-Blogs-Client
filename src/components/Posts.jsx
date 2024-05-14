@@ -22,8 +22,8 @@ const Posts = () => {
 
   const addToWishlist = async (blog) => {
     try {
-      const { displayName, email, _id, title, category, image_url, short_description } = blog;
-      await axios.post(`${apiUrl}/wishlists`, { displayName, email, _id, title, category, image_url, short_description });
+      const { displayName, email, _id, title, category, image_url, short_description,blogEmail } = blog;
+      await axios.post(`${apiUrl}/wishlists`, { displayName, email, _id, title, category, image_url, short_description,blogEmail });
       console.log("Blog post added to wishlist successfully");
     } catch (error) {
       console.error("Failed to add blog post to wishlist:", error);

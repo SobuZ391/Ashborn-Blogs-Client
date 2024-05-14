@@ -40,6 +40,7 @@ const WishlistPage = () => {
               imageUrl={item.image_url}
               category={item.category}
               shortDescription={item.short_description}
+              blogEmail={item.blogEmail}
             />
           ))}
         </div>

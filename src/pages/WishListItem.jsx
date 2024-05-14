@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
 
-const WishlistItem = ({ postId, title, imageUrl, category, shortDescription }) => {
+const WishlistItem = ({ postId, title, imageUrl, category, shortDescription,blogEmail }) => {
 
 
   const handleDelete =  id => {
