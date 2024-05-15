@@ -4,10 +4,9 @@ import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
 
-const WishlistItem = ({ postId, title, imageUrl, category, shortDescription,blogEmail }) => {
+const WishlistItem = ({ postId, title, imageUrl, category, shortDescription}) => {
 
-
-  const handleDelete =  id => {
+ const handleDelete =  id => {
     
     const proceed =confirm('Are You sure you want to delete')
     if(proceed){

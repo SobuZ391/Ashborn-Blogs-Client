@@ -1,29 +1,31 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+// WishlistPage.js
+import React, { useContext, useEffect, useState } from 'react';
+import axios from 'axios';
+
+import useAuth from '../Hooks/useAuth';
 import WishlistItem from './WishListItem';
 
-
 const WishlistPage = () => {
+  const { user } = useAuth();
   const [wishlist, setWishlist] = useState([]);
   const [loading, setLoading] = useState(true);
-  const apiUrl = import.meta.env.VITE_API_URL;
-  
+
   useEffect(() => {
     const fetchWishlist = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/wishlists`); 
-        setWishlist(response.data)
+        const response = await axios.get(`http://localhost:5000/wishlists`);
+        setWishlist(response.data);
       } catch (error) {
-        console.error("Failed to fetch wishlist:", error);
+        console.error('Failed to fetch wishlist:', error);
       } finally {
         setLoading(false);
       }
     };
-  
-    fetchWishlist();
-  }, [apiUrl]);
 
-
+    if (user) {
+      fetchWishlist();
+    }
+  }, [user]);
 
   return (
     <section className="p-4 gap-10 container mx-auto">
