@@ -30,15 +30,21 @@ const Register = () => {
   const verifyPassword = (password) => {
     const hasUppercase = /[A-Z]/.test(password);
     const hasLowercase = /[a-z]/.test(password);
+    const hasNumeric = /[0-9]/.test(password);
     const hasValidLength = password.length >= 6;
 
     if (!hasUppercase) {
-      toast.error("Password must contain at least one uppercase letter.");
+      toast.error("Password must contain at least one Uppercase letter.");
       return false;
     }
 
     if (!hasLowercase) {
       toast.error("Password must contain at least one lowercase letter.");
+      return false;
+    }
+
+    if (!hasNumeric) {
+      toast.error("Password must contain at least one  Number .");
       return false;
     }
 
@@ -81,14 +87,14 @@ const Register = () => {
   };
   return (
     <>
-      <div className="  hero  min-h-screen bg-base-200"  style={{backgroundImage: `url(https://img.freepik.com/free-photo/abstract-digital-grid-black-background_53876-97647.jpg?size=626&ext=jpg&ga=GA1.1.1224184972.1715385600&semt=ais_user)`}}>
+      <div className="  hero flex justify-center items-center  min-h-screen bg-base-200"  style={{backgroundImage: `url(https://img.freepik.com/free-photo/abstract-digital-grid-black-background_53876-97647.jpg?size=626&ext=jpg&ga=GA1.1.1224184972.1715385600&semt=ais_user)`}}>
       
-        <div className=" w-full lg:w-[40rem]  ">
+        <div className=" w-full  mx-auto  lg:w-[40rem]  ">
         
             
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="w-[90%]  shadow-2xl  rounded-xl bg-gray-300 glass"
+            className="w-[90%] mx-auto  shadow-2xl  rounded-xl bg-gray-300 glass"
           >
           <div className="text-center lg:text-left">
               <h1 className="text-5xl font-bold text-center mt-20 p-3  rounded-t-xl text-gray-900">
