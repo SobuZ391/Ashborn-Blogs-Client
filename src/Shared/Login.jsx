@@ -51,10 +51,10 @@ const Login = () => {
 
   return (
     <>
-      <div className="  flex flex-col w-full lg:h-screen  shadow-xl pt-20 " >
-        <div className="  w-[70%] mx-auto grid lg:grid-cols-2 border-2 rounded-xl hover:shadow-xl  h-full bg-white my-4">
+      <div className="  flex flex-col w-[100%] min-h-screen  shadow-xl pt-20 glass " style={{backgroundImage: `url(https://img.freepik.com/free-photo/abstract-digital-grid-black-background_53876-97647.jpg?size=626&ext=jpg&ga=GA1.1.1224184972.1715385600&semt=ais_user)`}} >
+        <div className=" glass w-[70%] mx-auto grid lg:grid-cols-2 border-2 rounded-xl hover:shadow-xl  h-full bg-white my-4">
           <div className="hidden lg:block   rounded-l-3xl ">
-           <img className="h-full object-contain"  src="https://img.freepik.com/free-vector/access-control-system-abstract-concept_335657-3180.jpg" alt="" />
+           <img className="h-full object-contain rounded-md"  src="https://img.freepik.com/free-vector/access-control-system-abstract-concept_335657-3180.jpg" alt="" />
           
           </div>
           <div className=" w-full shadow-2xl rounded-lg  lg:border-none border-y-2  lg:rounded-r-3xl  bg-base-100">
@@ -116,7 +116,7 @@ const Login = () => {
               </div>
               <label className="label">
               Don't have an account yet?
-                <Link to="/register" className="label-text-alt link link-hover">
+                <Link to="/register" className="btn  link link-hover">
                   Sign Up
                 </Link>
               </label>

@@ -15,7 +15,7 @@ const WishlistPage = () => {
   useEffect(() => {
     const fetchWishlist = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/wishlists`);
+        const response = await axios.get(`https://server-khaki-zeta.vercel.app/wishlists`);
         setWishlist(response.data);
       } catch (error) {
         console.error('Failed to fetch wishlist:', error);
@@ -44,7 +44,7 @@ const WishlistPage = () => {
       // If user confirms the deletion
       if (result.isConfirmed) {
         // Send a delete request to delete the wishlist item
-        fetch(`http://localhost:5000/wishlists/${id}`, {
+        fetch(`https://server-khaki-zeta.vercel.app/wishlists/${id}`, {
           method: 'DELETE'
         })
         .then(res => res.json())
@@ -73,7 +73,7 @@ const WishlistPage = () => {
   };
 
   return (
-    <section className="p-4 gap-10 container mx-auto">
+    <section className="p-4 gap-10 container min-h-screen mx-auto">
       <h1 className="text-3xl font-bold text-center mb-8">My Wishlist</h1>
       {loading ? (
         <p className="text-xl font-semibold text-center">Loading...</p>

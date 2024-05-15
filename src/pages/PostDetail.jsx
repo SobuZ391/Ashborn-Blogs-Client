@@ -26,7 +26,7 @@ const PostDetail = () => {
     if (confirmation.isConfirmed) {
       try {
         // Send a delete request to delete the blog post
-        const response = await axios.delete(`http://localhost:5000/blogs/${id}`);
+        const response = await axios.delete(`https://server-khaki-zeta.vercel.app/blogs/${id}`);
         console.log(response.data);
         // Show a success message
         Swal.fire(
@@ -47,7 +47,7 @@ const PostDetail = () => {
       }
     }
   };
-    console.log(user.email);
+  
   return (
     <section className="bg-gray-200">
       <Container
@@ -56,12 +56,12 @@ const PostDetail = () => {
       >
         <div className="post_detail_header flex justify-end mb-2">
           <div className="post_detail_button flex gap-4">
-            { user.email === blog.blogEmail && ( // Check if current user's email matches the blog owner's email
+            { user?.email === blog.blogEmail && ( // Check if current user's email matches the blog owner's email
               <Button variant="outlined">
                 <Link to={`/posts/${blog._id}/edit`}>Edit</Link>
               </Button>
             )}
-            { user.email === blog.blogEmail && ( // Check if current user's email matches the blog owner's email
+            { user?.email === blog.blogEmail && ( // Check if current user's email matches the blog owner's email
               <Button
                 variant="outlined"
                 color="error"

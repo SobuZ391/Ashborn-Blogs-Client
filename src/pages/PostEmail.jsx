@@ -28,7 +28,7 @@ const PostEmail = ({ blogId, blogEmail }) => {
     }
 
     // Simulating API call to submit comment data
-    fetch('http://localhost:5000/comments', {
+    fetch('https://server-khaki-zeta.vercel.app/comments', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

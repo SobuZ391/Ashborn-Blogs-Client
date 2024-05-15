@@ -37,7 +37,7 @@ const EditPost = () => {
       long_description: form.long_description.value,
     };
     console.log(updatedBlog);
-    fetch(`http://localhost:5000/blogs/${_id}`, {
+    fetch(`https://server-khaki-zeta.vercel.app/blogs/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

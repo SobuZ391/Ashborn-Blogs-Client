@@ -13,7 +13,7 @@ const Posts = () => {
   const { isPending, data: blogs } = useQuery({
     queryKey: ["blogs"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/blogs");
+      const res = await fetch("https://server-khaki-zeta.vercel.app/blogs");
       return res.json();
     },
   });
@@ -28,7 +28,7 @@ const Posts = () => {
   const addToWishlist = async (blog) => {
     try {
       // Fetch current wishlist from the server
-      const response = await axios.get("http://localhost:5000/wishlists");
+      const response = await axios.get("https://server-khaki-zeta.vercel.app/wishlists");
       const wishlist = response.data;
 
       // Check if the blog post is already in the wishlist
@@ -55,7 +55,7 @@ const Posts = () => {
         image_url,
         short_description,
       } = blog;
-      await axios.post(`http://localhost:5000/wishlists`, {
+      await axios.post(`https://server-khaki-zeta.vercel.app/wishlists`, {
         displayName,
         email,
         _id,

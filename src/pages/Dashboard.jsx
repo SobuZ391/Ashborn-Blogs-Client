@@ -11,12 +11,12 @@ const Dashboard = () => {
 
   const fetchTopPosts = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/blogs");
+      const response = await axios.get("https://server-khaki-zeta.vercel.app/blogs");
       const posts = response.data;
 
       // Filter out posts without long_description
       const postsWithDescription = posts.filter(post => post.long_description);
-
+console.log(postsWithDescription);
       // Sort posts based on the word count of the long description
       postsWithDescription.sort((a, b) => {
         const wordCountA = a.long_description.split(" ").length;

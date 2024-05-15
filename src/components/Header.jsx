@@ -26,8 +26,8 @@ const Navbar = () => {
   const { logout, user } = useAuth();
  
   return (
-    <div className="rounded-sm  ">
-      <div className="navbar container border-y-2  mx-auto ">
+    <div className="rounded-sm border-y-2 my-2 p-4  ">
+      <div className="navbar container   mx-auto ">
         <div className="navbar-start">
           <div className="dropdown z-10">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -58,10 +58,10 @@ const Navbar = () => {
           </div>
           <Link
             to="/"
-            className="btn btn-ghost  font-bold lg:w-[100%]   w-[80%] lg:text-xl"
+            className="lg:btn lg:btn-ghost  lg:font-bold lg:w-[100%] text-sm flex   w-[50%] lg:text-xl"
           >
-        <div className="flex" >  <img className="md:w-12 w-[50%] rounded-xl shadow-sm"  src="https://img.freepik.com/free-vector/illustration-social-media-concept_53876-36932.jpg?t=st=1715452127~exp=1715455727~hmac=938e61723805facc5f031a9f10dea1a2b0414968a444e7ce5e8a1a52cd670899&w=826" alt="" /> 
-           <p className="text-cyan-700 shadow-xl p-2 rounded-b-lg" >AshBorn Blog's</p></div>
+        <div  >  <p className="text-cyan-700 shadow-xl p-2 flex  rounded-b-lg" > 
+           AshBorn Blog's</p></div>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -99,14 +99,14 @@ const Navbar = () => {
               </ul>
             </div>
           ) : (
-            <div className="gap-2 flex ">
+            <div className="lg:gap-2 flex ">
               <Link to="/login">
-                <Button variant="outlined" className="">
+                <button  className=" btn btn-sm ">
                   Login
-                </Button>
+                </button>
               </Link>
               <Link to="/register">
-                <Button variant="outlined">Register</Button>
+                <button className="btn btn-sm">Register</button>
               </Link>
             </div>
           )}

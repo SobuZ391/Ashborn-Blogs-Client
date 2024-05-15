@@ -10,15 +10,14 @@ const AllBlogs = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const { user } = useAuth();
-  const apiUrl = import.meta.env.VITE_API_URL; // Assuming you have environment variables set up
-
+ 
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${apiUrl}/blogs`);
+      const response = await axios.get(`https://server-khaki-zeta.vercel.app/blogs`);
       setBlogs(response.data);
       setFilteredBlogs(response.data);
     } catch (error) {
@@ -48,7 +47,7 @@ const AllBlogs = () => {
   const addToWishlist = async (blog) => {
     try {
       const { _id, title, category, image_url, short_description } = blog;
-      await axios.post(`${apiUrl}/wishlists`, {
+      await axios.post(`https://server-khaki-zeta.vercel.app/blogs/wishlists`, {
         userId: user.id,
         blogId: _id,
         title,

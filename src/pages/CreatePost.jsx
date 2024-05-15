@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Swal from "sweetalert2"; // Import SweetAlert
 import "react-quill/dist/quill.snow.css";
 import useAuth from "../Hooks/useAuth";
 
@@ -26,44 +27,57 @@ const CreatePost = () => {
     "Uncategorized",
     "Weather",
   ];
-  console.log(user);
 
- const handleAddBlog = (e) => {
-  e.preventDefault();
-  const newBlog = {
-    blogEmail: user.email,
-    title,
-    category,
-   short_description,
-     long_description,
-    image_url,
-    ownerName: user.displayName, // Pass owner name
-    ownerProfilePicture: user.photoURL, // Pass owner profile picture
+  const handleAddBlog = (e) => {
+    e.preventDefault();
+    const newBlog = {
+      blogEmail: user.email,
+      title,
+      category,
+      short_description,
+      long_description,
+      image_url,
+      ownerName: user.displayName,
+      ownerProfilePicture: user.photoURL,
+    };
+
+    fetch(`https://server-khaki-zeta.vercel.app/blogs`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newBlog),
+    })
+      .then((res) => {
+        if (res.ok) {
+          // Blog created successfully
+          Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: 'Blog created successfully!',
+          }).then(() => {
+            window.location.href = "/"; // Navigate to home page
+          });
+        } else {
+          // Blog creation failed
+          throw new Error("Failed to create blog.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.message,
+        });
+      });
   };
 
-  // Send newBlog object to MongoDB
-  fetch(`http://localhost:5000/blogs`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newBlog),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-      // Handle response as needed
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-};
-
   return (
-    <section className="container mx-auto my-16 post  bg-slate-200 rounded-xl p-4">
+    <section className="container mx-auto my-16 post bg-slate-200 rounded-xl p-4">
       <div>
         <div className="flex items-center justify-center bg-accent rounded-xl">
-          <h2 className="  lg:text-4xl text-center border my-4 w-1/3 rounded-xl btn text-gray-700  font-bold">
+          <h2 className="lg:text-4xl text-center border my-4 w-1/3 rounded-xl btn text-gray-700 font-bold">
             Create Blog
           </h2>
         </div>

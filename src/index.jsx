@@ -23,9 +23,7 @@ import PrivateRoute from './PrivateRoute/PrivateRoute';
 import PostEmail from './pages/PostEmail';
 import AllBlogs from './pages/AllBlogs';
 import {
-  useQuery,
-  useMutation,
-  useQueryClient,
+ 
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
@@ -43,7 +41,7 @@ const router = createBrowserRouter([
     {
       path:"/posts/:id",
       element:<PostDetail></PostDetail>,
-      loader:({params})=>fetch(`${import.meta.env.VITE_API_URL}/blog/${params.id}`)
+      loader:({params})=>fetch(`https://server-khaki-zeta.vercel.app/blog/${params.id}`)
     },
     {
       path:"allblogs",
@@ -77,7 +75,7 @@ const router = createBrowserRouter([
     {
       path:"posts/:id/edit",
       element:<PrivateRoute><EditPost/></PrivateRoute>,
-      loader:({params})=>fetch(`http://localhost:5000/blog/${params.id}`)
+      loader:({params})=>fetch(`https://server-khaki-zeta.vercel.app/blog/${params.id}`)
     },
     {
       path:"/wishlist",
@@ -87,7 +85,7 @@ const router = createBrowserRouter([
     {
       path:"/postEmail",
       element:<PostEmail></PostEmail>,
-      loader:({params})=>fetch(`http://localhost:5000/blog/${params.id}`)
+      loader:({params})=>fetch(`https://server-khaki-zeta.vercel.app/blog/${params.id}`)
     }
    
   

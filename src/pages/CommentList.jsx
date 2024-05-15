@@ -10,7 +10,7 @@ const CommentList = ({ blogId }) => {
 
   const fetchComments = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/comments/${blogId}`);
+      const response = await fetch(`https://server-khaki-zeta.vercel.app/comments/${blogId}`);
       if (!response.ok) {
         throw new Error('Failed to fetch comments');
       }
