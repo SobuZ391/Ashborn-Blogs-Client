@@ -52,7 +52,7 @@ const PostEmail = ({ blogId, blogEmail }) => {
   };
 
   return (
-    <div className='container mx-auto bg-white rounded-xl border-2 p-4'>
+    <div className='container mx-auto  bg-white rounded-xl border-2 p-4'>
       <h3 className='text-xl font-semibold' >Add Comment</h3>
       <form onSubmit={handleSubmit} className="comment-form flex flex-col my-2">
   

@@ -18,7 +18,7 @@ function NewsLetter() {
   };
 
   return (
-    <section className="p-6 dark:text-gray-800 flex container border rounded-xl my-4 mx-auto gap-2 ">
+    <section className="p-6 dark:text-gray-800 flex lg:flex-row flex-col container border rounded-xl my-4 mx-auto gap-2 ">
       <form noValidate="" className="container w-full max-w-xl p-8 mx-auto space-y-6 rounded-md hover:shadow-xl dark:bg-gray-50">
         <h2 className="w-full text-3xl font-bold leading-tight">SUBSCRIBE TO MY NEWSLETTER</h2>
         <div>
