@@ -6,7 +6,7 @@ import useAuth from './../Hooks/useAuth';
 
 const PrivateRoute = ({children}) => {
     const { user, loading } = useAuth(); 
-    const location = useLocation(); 
+   
 
     if (loading) {
       
@@ -53,15 +53,15 @@ const PrivateRoute = ({children}) => {
 </div>
     </div>
     }
-	if(user) return children
-    
+	
     if (!user) {
-   
-      return <Navigate to="/login" state={ location.pathname }  replace={true}/>;
+        // If user is not authenticated, redirect to the login page
+        return <Navigate to="/login" replace />;
     }
-    
-    
-    return <>{children}</>;
+
+    // If user is authenticated, render the children components
+    return children;
 }
+
 
 export default PrivateRoute;

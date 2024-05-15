@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import { useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2"; // Import SweetAlert
 
 const EditPost = () => {
   const [category, setCategory] = useState(""); // Adding useState hook for category
@@ -44,11 +45,31 @@ const EditPost = () => {
       },
       body: JSON.stringify(updatedBlog),
     })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+       .then((res) => {
+        if (res.ok) {
+          // Blog created successfully
+          Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: 'Blog created successfully!',
+          }).then(() => {
+            window.location.href = "/"; // Navigate to home page
+          });
+        } else {
+          // Blog creation failed
+          throw new Error("Failed to create blog.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.message,
+        });
       });
-  };
+    }
+
 
   return (
     <section className="container mx-auto my-16 post  bg-slate-200 rounded-xl p-4">
