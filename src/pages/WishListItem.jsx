@@ -4,24 +4,10 @@ import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
 
-const WishlistItem = ({ postId, title, imageUrl, category, shortDescription}) => {
+const WishlistItem = ({ postId, title, imageUrl, category, shortDescription,blogEmail,handleDelete }) => {
 
- const handleDelete =  id => {
-    
-    const proceed =confirm('Are You sure you want to delete')
-    if(proceed){
-      fetch(`http://localhost:5000/wishlists/${id}`,{
-        method:'DELETE'
-      })
-      .then(res=>res.json())
-      .then(data=>{
-        console.log(data)
-      }
-        )
-    }
-  
-  };
 
+ 
   return (
     <article className="w-[100%] lg:w-[80%] my-4 hover:shadow-md bg-slate-50 p-2 rounded-2xl border-y-2 pb-2 translate-x-0 cursor-default">
       <div>

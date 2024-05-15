@@ -15,16 +15,20 @@ import Register from './Shared/Register';
 import Login from './Shared/Login';
 import CreatePost from './pages/CreatePost';
 import EditPost from './pages/EditPost';
-import CategoryPosts from './pages/CategoryPosts';
 import Dashboard from './pages/Dashboard';
 import AuthorPosts from './pages/AuthorPosts/AuthorPosts';
 import FirebaseProvider from './FirebaseProvider/FirebaseProvider';
 import WishlistPage from './pages/WishlistPage';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
-import WishlistItem from './pages/WishListItem';
 import PostEmail from './pages/PostEmail';
 import AllBlogs from './pages/AllBlogs';
-
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 
 const router = createBrowserRouter([
   {
@@ -61,10 +65,7 @@ const router = createBrowserRouter([
       path:"addBlog",
       element:<CreatePost/>
     },
-    {
-      path:`posts/categories/:category`,
-      element:<CategoryPosts/>
-    },
+  
     {
       path:"posts/user/:id",
       element:<AuthorPosts/>
@@ -75,7 +76,7 @@ const router = createBrowserRouter([
     },
     {
       path:"posts/:id/edit",
-      element:<EditPost/>,
+      element:<PrivateRoute><EditPost/></PrivateRoute>,
       loader:({params})=>fetch(`http://localhost:5000/blog/${params.id}`)
     },
     {
@@ -95,12 +96,15 @@ const router = createBrowserRouter([
   },
 ]);
 
-
+const queryClient = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <FirebaseProvider>
+   <QueryClientProvider client={queryClient}>
+   <FirebaseProvider>
         <RouterProvider router={router}/>
     </FirebaseProvider>
+    </QueryClientProvider>
+    
 </React.StrictMode>,
 )

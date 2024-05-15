@@ -1,28 +1,53 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, Navigate, useLoaderData } from "react-router-dom";
 import { Button, Container } from "@mui/material";
 import axios from "axios";
 import PostEmail from "./PostEmail";
 import CommentList from "./CommentList";
 import useAuth from "../Hooks/useAuth";
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss'
 
 const PostDetail = () => {
-  
   const blog = useLoaderData();
- 
-  
-
+  const {  user } = useAuth(); // Assuming useAuth provides current user information including email
   const handleDelete = async (id) => {
-    const proceed = window.confirm("Are you sure you want to delete?");
-    if (!proceed) return;
-
-    try {
-      const response = await axios.delete(`http://localhost:5000/blogs/${id}`);
-      console.log(response.data);
-  } catch (error) {
-      console.error("Error deleting post:", error.message);
+    // Display a confirmation dialog using SweetAlert
+    const confirmation = await Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    });
+  
+    // If user confirms the deletion
+    if (confirmation.isConfirmed) {
+      try {
+        // Send a delete request to delete the blog post
+        const response = await axios.delete(`http://localhost:5000/blogs/${id}`);
+        console.log(response.data);
+        // Show a success message
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        );
+        // Navigate to the home page
+        window.location.href = '/'; // Change this to the URL of your home page
+      } catch (error) {
+        // Show an error message if deletion fails
+        Swal.fire(
+          'Error!',
+          'An error occurred while deleting the post.',
+          'error'
+        );
+        console.error("Error deleting post:", error.message);
+      }
     }
   };
-    console.log(blog.blogEmail);
+    console.log(user.email);
   return (
     <section className="bg-gray-200">
       <Container
@@ -31,17 +56,20 @@ const PostDetail = () => {
       >
         <div className="post_detail_header flex justify-end mb-2">
           <div className="post_detail_button flex gap-4">
-            <Button variant="outlined">
-              <Link to={`/posts/${blog._id}/edit`}>Edit</Link>
-            </Button>
-
-            <Button
-              variant="outlined"
-              color="error"
-              onClick={() => handleDelete(blog._id)}
-            >
-              Delete
-            </Button>
+            { user.email === blog.blogEmail && ( // Check if current user's email matches the blog owner's email
+              <Button variant="outlined">
+                <Link to={`/posts/${blog._id}/edit`}>Edit</Link>
+              </Button>
+            )}
+            { user.email === blog.blogEmail && ( // Check if current user's email matches the blog owner's email
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={() => handleDelete(blog._id)}
+              >
+                Delete
+              </Button>
+            )}
           </div>
         </div>
         <h1 className="text-5xl m-2 font-bold">{blog.title}</h1>
@@ -58,13 +86,11 @@ const PostDetail = () => {
         </div>
       </Container>
       <div>
-      
-     <div className="w-2/3 mx-auto">
-     <CommentList blogId={blog._id} />
-      <PostEmail blogId={blog._id} blogEmail={blog.blogEmail}  />
-      
-     </div>
-    </div>
+        <div className="w-2/3 mx-auto">
+          <CommentList blogId={blog._id} />
+          <PostEmail blogId={blog._id} blogEmail={blog.blogEmail} />
+        </div>
+      </div>
     </section>
   );
 };

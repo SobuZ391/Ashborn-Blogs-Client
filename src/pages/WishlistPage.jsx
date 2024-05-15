@@ -1,6 +1,8 @@
 // WishlistPage.js
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss'
 
 import useAuth from '../Hooks/useAuth';
 import WishlistItem from './WishListItem';
@@ -27,6 +29,49 @@ const WishlistPage = () => {
     }
   }, [user]);
 
+
+  const handleDelete = id => {
+    // Display a confirmation dialog using SweetAlert
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      // If user confirms the deletion
+      if (result.isConfirmed) {
+        // Send a delete request to delete the wishlist item
+        fetch(`http://localhost:5000/wishlists/${id}`, {
+          method: 'DELETE'
+        })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          // Show a success message using SweetAlert
+          Swal.fire(
+            'Deleted!',
+            'Your wishlist item has been deleted.',
+            'success'
+          );
+          const remaining =wishlist.filter(wishlistD=> wishlistD._id != id);
+          setWishlist(remaining)
+        })
+        .catch(error => {
+          // Show an error message using SweetAlert if deletion fails
+          Swal.fire(
+            'Error!',
+            'An error occurred while deleting the wishlist item.',
+            'error'
+          );
+          console.error("Error deleting wishlist item:", error.message);
+        });
+      }
+    });
+  };
+
   return (
     <section className="p-4 gap-10 container mx-auto">
       <h1 className="text-3xl font-bold text-center mb-8">My Wishlist</h1>
@@ -43,6 +88,7 @@ const WishlistPage = () => {
               category={item.category}
               shortDescription={item.short_description}
               blogEmail={item.blogEmail}
+              handleDelete={handleDelete}
             />
           ))}
         </div>
