@@ -3,6 +3,7 @@ import Posts from './../components/Posts';
 import Banner from '../components/Banner';
 import NewsLetter from '../components/NewsLetter';
 import Team from '../components/Team';
+import Contact from '../components/Contact';
 
 
 const Home = () => {
@@ -14,6 +15,7 @@ const Home = () => {
       <Posts />
       <NewsLetter/>
       <Team/>
+      <Contact/>
     </>
     );
 };
