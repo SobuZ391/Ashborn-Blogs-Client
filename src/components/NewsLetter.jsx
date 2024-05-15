@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 function NewsLetter() {
   const [email, setEmail] = useState('');
 
@@ -17,9 +18,15 @@ function NewsLetter() {
     setEmail(e.target.value);
   };
 
+ 
+  
+
   return (
     <section className="p-6 dark:text-gray-800 flex lg:flex-row flex-col container border rounded-xl my-4 mx-auto gap-2 ">
-      <form noValidate="" className="container w-full max-w-xl p-8 mx-auto space-y-6 rounded-md hover:shadow-xl dark:bg-gray-50">
+    
+
+   
+     <form noValidate="" className="container w-full max-w-xl p-8 mx-auto space-y-6 rounded-md hover:shadow-xl dark:bg-gray-50">
         <h2 className="w-full text-3xl font-bold leading-tight">SUBSCRIBE TO MY NEWSLETTER</h2>
         <div>
        <p className='text-center   w-[80%]' >Get the latest updates and exclusive offers delivered straight to your inbox! </p>
@@ -33,6 +40,7 @@ function NewsLetter() {
           <ToastContainer />
         </div>
       </form>
+     
     <div>
     <section className="dark:bg-gray-100 dark:text-gray-800 border-2 rounded-xl">
     <div className="container flex flex-col justify-center p-4 my-4  mx-auto md:p-8">

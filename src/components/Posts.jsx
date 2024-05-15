@@ -5,6 +5,7 @@ import useAuth from "../Hooks/useAuth";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 import { useQuery } from "@tanstack/react-query";
+import { motion } from "framer-motion"
 
 const Posts = () => {
   // const [blogs, setBlogs] = useState([]);
@@ -56,6 +57,9 @@ if(isPending){
   };
   return (
     <section className="p-4 gap-10 container mx-auto">
+    
+  
+
       {blogs?.length > 0 ? (
         <div className="posts_container grid lg:grid-cols-3">
           {blogs.slice(0, 6).map((blog) => ( // Limit to first 6 blogs

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
-
+import { motion } from "framer-motion"
 const PostItem = ({ postId, thumbnail, title, category, shortDescription, longDescription, addToWishlist}) => {
   
   
@@ -10,7 +10,13 @@ const PostItem = ({ postId, thumbnail, title, category, shortDescription, longDe
   };
 
   return (
+ 
+  
+  <motion.div animate={{ x: 10,y:10 }}
+  transition={{ ease: "easeOut", duration: 0.4 }}   
+  >
     <article className='w-[100%]  lg:w-[80%]  my-4 hover:shadow-md bg-slate-50 p-2 rounded-2xl border-y-2  pb-2 translate-x-0 cursor-default'>
+    
       <div>
         <img className='rounded-xl h-[16rem]  overflow-hidden ' src={thumbnail} alt='' />
       </div>
@@ -34,6 +40,8 @@ const PostItem = ({ postId, thumbnail, title, category, shortDescription, longDe
         </div>
       </div>
     </article>
+    </motion.div>
+   
   );
 };
 

@@ -63,7 +63,7 @@ const AllBlogs = () => {
   };
 
   return (
-    <section className="p-4 gap-10 container mx-auto">
+    <section className="p-4 gap-10 container min-h-screen mx-auto">
       <div className="flex  justify-between items-center mb-4">
        
         <input

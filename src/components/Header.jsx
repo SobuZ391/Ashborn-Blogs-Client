@@ -24,6 +24,7 @@ const Navbar = () => {
   );
 
   const { logout, user } = useAuth();
+ 
   return (
     <div className="rounded-sm  ">
       <div className="navbar container border-y-2  mx-auto ">
@@ -86,6 +87,7 @@ const Navbar = () => {
               >
                 <li>
                   <button className="btn btn-sm  btn-ghost">
+                  
                     {user?.displayName || "user name not found"}
                   </button>
                 </li>
